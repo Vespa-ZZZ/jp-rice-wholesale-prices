@@ -1,0 +1,65 @@
+{
+    "actorSpecification": 1,
+    "fields": {},
+    "views": {
+        "overview": {
+            "title": "Overview",
+            "transformation": {
+                "fields": [
+                    "tradeMonth",
+                    "cropYear",
+                    "prefectureJa",
+                    "varietyJa",
+                    "priceYenPer60kg",
+                    "quantityTonnes",
+                    "cropYearAveragePriceYenPer60kg",
+                    "previousCropYearAveragePriceYenPer60kg",
+                    "isNationalTotal",
+                    "isPreliminary",
+                    "changeType"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "tradeMonth": {
+                        "label": "Month"
+                    },
+                    "cropYear": {
+                        "label": "Crop year"
+                    },
+                    "prefectureJa": {
+                        "label": "Prefecture"
+                    },
+                    "varietyJa": {
+                        "label": "Variety"
+                    },
+                    "priceYenPer60kg": {
+                        "label": "Price (JPY / 60 kg)"
+                    },
+                    "quantityTonnes": {
+                        "label": "Volume (t)",
+                        "format": "number"
+                    },
+                    "cropYearAveragePriceYenPer60kg": {
+                        "label": "Crop-year avg (JPY / 60 kg)"
+                    },
+                    "previousCropYearAveragePriceYenPer60kg": {
+                        "label": "Prev. crop-year avg"
+                    },
+                    "isNationalTotal": {
+                        "label": "National",
+                        "format": "boolean"
+                    },
+                    "isPreliminary": {
+                        "label": "Preliminary",
+                        "format": "boolean"
+                    },
+                    "changeType": {
+                        "label": "Change"
+                    }
+                }
+            }
+        }
+    }
+}

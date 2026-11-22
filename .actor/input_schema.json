@@ -1,0 +1,63 @@
+{
+    "title": "Japan rice prices",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "months": {
+            "title": "Months",
+            "type": "array",
+            "description": "Trade months as YYYY-MM, e.g. 2026-10. When a month belongs to two crop years (around September), both are returned. Empty = the latest months (see below). In monitoring mode, setting Months limits the check to those months.",
+            "editor": "stringList"
+        },
+        "latestMonths": {
+            "title": "Latest months",
+            "type": "integer",
+            "description": "When Months is empty and monitoring is off: how many of the most recent months to return. In monitoring mode every listed month is checked instead.",
+            "minimum": 1,
+            "maximum": 24,
+            "default": 1
+        },
+        "prefectures": {
+            "title": "Prefectures (Japanese)",
+            "type": "array",
+            "description": "Producing prefectures as written by MAFF, e.g. 新潟, 北海道, 秋田. Empty = all.",
+            "editor": "stringList",
+            "prefill": [
+                "新潟"
+            ]
+        },
+        "varieties": {
+            "title": "Variety contains",
+            "type": "array",
+            "description": "Words in the variety/brand name, e.g. コシヒカリ, ゆめぴりか, 魚沼. Full-/half-width insensitive.",
+            "editor": "stringList"
+        },
+        "includeNationalTotal": {
+            "title": "Include national average",
+            "type": "boolean",
+            "description": "Add the national average price / total volume row (only when no prefecture or variety filter is set).",
+            "default": true
+        },
+        "onlyNew": {
+            "title": "Monitoring mode (new months and revisions only)",
+            "type": "boolean",
+            "description": "Re-read every month MAFF lists and output only new or changed rows since the previous run with the same state key (MAFF corrects preliminary figures, also for earlier months; corrections are returned with changeType = revision). Months / Latest months are ignored unless Months is set.",
+            "default": false
+        },
+        "stateKey": {
+            "title": "State key",
+            "type": "string",
+            "description": "Name of the saved monitoring state. Letters, digits, - and _ only.",
+            "editor": "textfield",
+            "default": "default"
+        },
+        "maxItems": {
+            "title": "Max rows",
+            "type": "integer",
+            "description": "Maximum rows per run.",
+            "minimum": 1,
+            "maximum": 100000,
+            "default": 5000
+        }
+    }
+}

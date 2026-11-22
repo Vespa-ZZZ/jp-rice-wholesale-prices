@@ -1,0 +1,17 @@
+{
+  "name": "jp-rice-wholesale-prices",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Monthly contract prices and volumes of Japanese rice by prefecture and variety (MAFF 相対取引価格).",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test test/rice.test.js"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "apify": "^3.2.6",
+    "cheerio": "^1.0.0"
+  }
+}
