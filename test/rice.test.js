@@ -251,3 +251,25 @@ test('review round 3: reworded item in the price list, explicit months with pend
     assert.match(a.lifecycle[2], /took over/);
     assert.equal(a.records.length, 0);
 });
+
+test('prechecks the dataset item budget and allows non-PPE output', async () => {
+    for (const [isPayPerEvent, budget] of [[true, 1], [true, 0], [false, 0]]) {
+        const configureActor = (actor, records) => {
+            actor.getChargingManager = () => ({
+                getPricingInfo: () => ({ isPayPerEvent }),
+                calculateMaxEventChargeCountWithinLimit(event) {
+                    assert.equal(event, 'apify-default-dataset-item');
+                    return budget - records.length;
+                },
+            });
+        };
+        const input = {};
+        const actor = fakeActor(input);
+        configureActor(actor, actor.records);
+        await exec(input, { actor });
+        assert.deepEqual(actor.lifecycle, ['init', 'exit']);
+        assert.equal(actor.records.length, isPayPerEvent ? budget : 121);
+        assert.equal(actor.values.RUN_SUMMARY.pushed, actor.records.length);
+        assert.equal(actor.values.RUN_SUMMARY.stopReason, isPayPerEvent ? 'spendingLimit' : null);
+    }
+});

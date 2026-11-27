@@ -1,5 +1,6 @@
 import { setTimeout as delay } from 'node:timers/promises';
 import { createHash } from 'node:crypto';
+import { pushDataWithinLimit } from './charging.js';
 import { HOST, LIST_URL, SOURCE, monthlyFiles, normalizeForSearch, parseMonthly, sanitize } from './rice.js';
 
 const USER_AGENT = 'jp-rice-wholesale-prices-actor/1.0';
@@ -198,7 +199,7 @@ export async function run({ actor, log, fetchImpl = fetch, sleep = delay, now = 
             }
             if (out.length) {
                 if (opts.onlyNew) await assertOwner();
-                const res = await actor.pushData(out.map((o) => o.row));
+                const res = await pushDataWithinLimit(actor, out.map((o) => o.row));
                 let stored = out.length;
                 if (res?.eventChargeLimitReached) {
                     limitReached = true;
